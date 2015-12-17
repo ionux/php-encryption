@@ -1,9 +1,9 @@
 php-encryption
 ===============
 
-This is a class for doing symmetric encryption in PHP. **Requires PHP 5.4 or newer.**
-
 [![Build Status](https://travis-ci.org/defuse/php-encryption.svg?branch=master)](https://travis-ci.org/defuse/php-encryption)
+
+This is a class for doing symmetric encryption in PHP. **Requires PHP 5.4 or newer.**
 
 Implementation
 --------------
@@ -14,18 +14,24 @@ a multiple of the block size. HKDF is used to split the user-provided key into
 two keys: one for encryption, and the other for authentication. It is
 implemented using the `openssl_` and `hash_hmac` functions.
 
-Warning
---------
+Audit Status
+-------------
 
-This is new code, and it hasn't received much review by experts. I have spent
-many hours making it as secure as possible (extensive runtime tests, secure
-coding practices), and auditing it for problems, but I may have missed some
-issues. So be careful. Don't trust it with your life. Check out the open GitHub
-issues for a list of known issues. If you find a problem with this library,
-please report it by opening a GitHub issue.
+This code has not been subjected to a formal, paid, security audit. However, it
+has received some informal review from members of the PHP security community.
 
-That said, you're probably much better off using this library than any other
-encryption library written in PHP. 
+As the author of this library, I take security very seriously and always opt to
+not implement a feature unless I am confident that I can do so without
+introducing security bugs. I take particular care to ensure the library is hard
+to use in an insecure way, even by someone who is not experienced in
+cryptography.
+
+This library considers many edge cases that most PHP encryption libraries do not
+handle correctly. In all likelihood, you are safer using this library than
+almost any other encryption library for PHP.
+
+If you use this library as a part of your business and would like to fund (or
+help fund) a formal audit, I would be very grateful.
 
 Philosophy
 -----------
@@ -67,13 +73,18 @@ This library is developed around several core values:
     > library will call "encrypt" and "decrypt" not caring about how they are
     > implemented.
 
-- Rule #4: The library should consist of a single PHP file and nothing more.
+- Rule #4: The library should require no special installation.
 
     > Some PHP encryption libraries, like libsodium-php [1], are not
     > straightforward to install and cannot packaged with "just download and
-    > extract" applications. This library will always be just one PHP file
-    > that you can put in your source tree and require().
+    > extract" applications. This library will always be just a handful of PHP
+    > files that you can copy to your source tree and require().
 
 References:
 
     [1] https://github.com/jedisct1/libsodium-php
+
+Authors
+---------
+
+This library is authored by Taylor Hornby and Scott Arciszewski.
